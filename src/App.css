@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+:root {
+	font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+	--color-gold: #b98304;
+	--color-amber: #ad5601;
+	--color-crimson: #a61f2d;
+	--color-deep-purple: #20054c;
+	--color-stone: #9f8b82;
+	--site-header-height: 140px;
+	color: #f8f3ee;
+	background-color: var(--color-deep-purple);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+.home-background,
+body {
+	margin: 0;
+	min-height: 100vh;
+	background: linear-gradient(180deg, rgba(5, 2, 25, 0.95), rgba(7, 3, 25, 0.95));
+	transition: background 0.4s ease;
+}
+
+body.home-background {
+	background-image:
+		linear-gradient(180deg, rgba(22, 9, 77, 0.6), rgba(8, 2, 16, 0.85)),
+		url('/src/assets/shashankGalaxy.jpg');
+	/* use CSS variables updated from JS for interactive movement */
+	background-position: var(--bg-pos-x, 50%) var(--bg-pos-y, 30%);
+	background-size: cover;
+	background-attachment: fixed;
+	background-blend-mode: multiply;
+	filter: brightness(1.2) saturate(1.2);
+	animation: floatGalaxy 44s ease-in-out infinite;
+}
+
+body.home-background::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	background: radial-gradient(circle at 20% 20%, rgba(255, 213, 128, 0.35), transparent 45%);
+	opacity: 0.5;
+	pointer-events: none;
+	animation: auroraPulse 18s ease-in-out infinite;
+	transform: perspective(1200px) rotateX(2deg);
+}
+
+body.home-background::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	background: linear-gradient(135deg, rgba(248, 227, 200, 0.08), transparent);
+	opacity: 0.7;
+	transform: scale(1.05);
+	filter: blur(2px);
+	animation: shimmer 26s linear infinite;
+	backface-visibility: hidden;
+}
+
+.section-home {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+	max-width: none;
+	width: 100%;
+	padding: 0;
+	min-height: calc(100vh - var(--site-header-height));
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+@keyframes depthTilt {
+	0% {
+		transform: perspective(900px) translateZ(38px) rotateX(0.7deg);
+	}
+	100% {
+		transform: perspective(900px) translateZ(42px) rotateX(1.3deg);
+	}
+}
+
+/* @keyframes floatGalaxy {
+	0% {
+		background-position: 45% 35%;
+	}
+	35% {
+		background-position: 60% 45%;
+	}
+	100% {
+		background-position: 45% 35%;
+	}
+} */
+
+@keyframes auroraPulse {
+	0% {
+		opacity: 0.2;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.5;
+		transform: scale(1.05);
+	}
+	100% {
+		opacity: 0.2;
+		transform: scale(1);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		opacity: 0.3;
+	}
+	50% {
+		opacity: 0.65;
+		transform: scale(1.08);
+	}
+	100% {
+		opacity: 0.3;
+	}
+}
+
+#root {
+	min-height: 100vh;
+}
+
+.app-shell {
+	min-height: 100vh;
+	background: linear-gradient(180deg, lch(37.33% 72.86 305.7 / 0.9) 0%, #070012 60%, var(--color-deep-purple) 100%);
+}
+
+body.home-background .app-shell {
+	background: linear-gradient(180deg, rgba(5, 2, 25, 0.6), rgba(6, 2, 25, 0.4));
+}
+
+.content-stack {
+	margin: 0 auto;
+	padding: 32px 8vw 64px;
+	display: flex;
+	flex-direction: column;
+	gap: 36px;
+}
+
+.section {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 110px 38px 90px;
+	border-radius: 36px;
+	background: linear-gradient(135deg, rgba(148, 79, 18, 0.25), rgba(10, 2, 27, 0.85));
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	box-shadow: 0 30px 60px rgba(5, 0, 10, 0.6);
+	text-align: center;
+}
+
+.section-cultural {
+	background: repeating-linear-gradient(
+		-45deg,
+		rgba(173, 86, 1, 0.85),
+		rgba(173, 86, 1, 0.85) 14px,
+		rgba(0, 0, 0, 0.15) 14px,
+		rgba(0, 0, 0, 0.15) 26px
+	);
+}
+
+.section-committee {
+	background: linear-gradient(120deg, rgba(166, 31, 45, 0.75), rgba(12, 3, 40, 0.95));
+}
+
+.section-event {
+	background: linear-gradient(135deg, rgba(185, 131, 4, 0.25), rgba(25, 6, 43, 0.95));
+}
+
+.section-schedule {
+	background: linear-gradient(120deg, rgba(28, 5, 65, 0.95), rgba(10, 3, 25, 0.95));
+}
+
+.section-sponsors {
+	background: linear-gradient(145deg, rgba(159, 139, 130, 0.4), rgba(20, 7, 60, 0.95));
+}
+
+.section-gallery {
+	background: linear-gradient(135deg, rgba(117, 90, 77, 0.45), rgba(28, 5, 45, 0.9));
+}
+
+.section-title {
+	font-size: clamp(2.2rem, 3vw, 2.8rem);
+	letter-spacing: 0.12em;
+	margin-bottom: 16px;
+	text-transform: uppercase;
+	color: #fff8f1;
+}
+
+.section-kicker {
+	font-size: 0.8rem;
+	letter-spacing: 0.6em;
+	text-transform: uppercase;
+	color: var(--color-gold);
+	margin-bottom: 24px;
+}
+
+.section-copy {
+	max-width: 720px;
+	margin: 0 auto;
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: rgba(248, 243, 238, 0.85);
+}
+
+.home-logo {
+	width: min(320px, 70vw);
+	height: auto;
+	filter: drop-shadow(0 14px 30px rgba(3, 2, 15, 0.55));
+	margin-bottom: 18px;
+}
+
+.home-soon {
+	font-size: clamp(1.2rem, 3vw, 2rem);
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: #fff3e4;
+	margin: 0;
+}
+
+@media (max-width: 768px) {
+	.content-stack {
+		padding: 24px 6vw 48px;
+	}
+
+	.section {
+		padding: 90px 20px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.section {
+		padding: 120px 64px 110px;
+	}
+}
+
+/* Apply tilt/translate from mouse to the hero card for depth */
+.section-home {
+	transform: perspective(900px) translateZ(var(--parallax-z, 40px)) rotateX(var(--tilt-x, 1deg)) rotateY(var(--tilt-y, 1deg));
+	transition: transform 0.12s linear;
+}
+
+/* subtle parallax on the overlay layers */
+body.home-background::before {
+	transform: perspective(1200px) translateZ(0) translate3d(calc(var(--tilt-y, 0deg) * 0.4), calc(var(--tilt-x, 0deg) * 0.25), 0) rotateX(2deg);
+}
+
+body.home-background::after {
+	transform: translateZ(0) translate3d(calc(var(--tilt-y, 0deg) * -0.18), calc(var(--tilt-x, 0deg) * -0.12), 0) scale(1.05);
+}
