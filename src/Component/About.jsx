@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useState } from 'react'
 
 import './About.css'
 
-const hmrVideo = '/hmr.mp4'
-
 import hmrVideo from '../assets/hmr.mp4'
 import './About.css'
 
