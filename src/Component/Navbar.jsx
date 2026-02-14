@@ -6,8 +6,8 @@ import logo from '../assets/shreeNavlogo.png'
 const links = [
   { label: 'HOME', href: '/' },
   { label: 'EVENTS', href: '/events' },
-  { label: 'SPONSORS', href: '/sponsors' },
   { label: 'GALLERY', href: '/gallery' },
+  { label: 'SPONSORS', href: '/sponsors' },
   { label: 'TEAM', href: '/committee' },
   { label: 'ABOUT', href: '/about' },
 ]
