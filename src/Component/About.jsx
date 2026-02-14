@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
-import hmrVideo from '../assets/hmr.mp4'
 import './About.css'
+
+const hmrVideo = new URL('../assets/hmr.mp4', import.meta.url).href
 
 export default function About() {
   const videoRef = useRef(null)
