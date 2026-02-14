@@ -1,73 +1,38 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react'
+import { useLocation } from 'react-router-dom'
 import './Navbar.css'
+import GooeyNav from './navanimation/GooeyNav'
 import logo from '../assets/shreeNavlogo.png'
 
 const links = [
-  { label: 'HOME', to: '/' },
-  { label: 'EVENTS', to: '/events' },
-  { label: 'SPONSORS', to: '/sponsors' },
-  { label: 'GALLERY', to: '/gallery' },
-  { label: 'TEAM', to: '/committee' },
-  { label: 'ABOUT', to: '/about' },
+  { label: 'HOME', href: '/' },
+  { label: 'EVENTS', href: '/events' },
+  { label: 'SPONSORS', href: '/sponsors' },
+  { label: 'GALLERY', href: '/gallery' },
+  { label: 'TEAM', href: '/committee' },
+  { label: 'ABOUT', href: '/about' },
 ]
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false)
-
-  const closeMenu = () => setOpen(false)
+  const location = useLocation()
+  const findInitialIndex = () => links.findIndex(link => link.href === location.pathname)
+  const initialIndex = findInitialIndex() !== -1 ? findInitialIndex() : 0
 
   return (
-    <>
-      {/* Mobile menu backdrop */}
-      {open && (
-        <div
-          className="nav-backdrop"
-          onClick={closeMenu}
-          aria-hidden="true"
+    <header className="site-header">
+      <div className="brand">
+        <img src={logo} alt="Emblazon Logo" className="brand-logo" />
+      </div>
+
+      <div className="desktop-nav">
+        <GooeyNav 
+          items={links} 
+          initialActiveIndex={initialIndex}
+          animationTime={500}
+          particleCount={12}
         />
-      )}
-      
-      <header className="site-header">
-        <div className="brand">
-          <img src={logo} alt="Emblazon Logo" className="brand-logo" />
-        </div>
-
-        <button
-          className={open ? 'nav-toggle open' : 'nav-toggle'}
-          aria-controls="primary-navigation"
-          aria-expanded={open}
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          <span className="sr-only">Menu</span>
-          <span className="bar" />
-          <span className="bar" />
-          <span className="bar" />
-        </button>
-
-        <nav
-          id="primary-navigation"
-          className={open ? 'site-nav open' : 'site-nav'}
-          aria-label="Primary Navigation"
-        >
-          <ul>
-            {links.map((link) => (
-              <li key={link.label}>
-                <NavLink
-                  to={link.to}
-                  className={({ isActive }) =>
-                    isActive ? 'nav-link active' : 'nav-link'
-                  }
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-    </>
+      </div>
+    </header>
   )
 }
 

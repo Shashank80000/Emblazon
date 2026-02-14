@@ -9,7 +9,9 @@ import SparkleCursor from './Component/SparkleCursor'
 import StartAnimation from './Component/StartAnimation'
 import SponsorSection from './Component/oursponser'
 import Gallary from './Component/Gallary'
+import Galaxy from './Component/Galaxy'
 import './App.css'
+
 
 function App() {
   const location = useLocation()
@@ -33,6 +35,7 @@ function App() {
 
   return (
     <div className={`app-shell ${animationComplete ? 'animation-complete' : 'animation-running'}`}>
+      <Galaxy />
       {!animationComplete && <StartAnimation onComplete={handleAnimationComplete} />}
       <SparkleCursor />
       <Navbar />
