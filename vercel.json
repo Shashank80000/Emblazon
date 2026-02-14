@@ -1,32 +1,7 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "env": {
-    "VITE_APP_TITLE": "@pr-title"
-  },
   "rewrites": [
     {
-      "source": "/(?!api|_next|_static|.*\\.)(.*)",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/events",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/sponsors",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/gallery",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/committee",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
