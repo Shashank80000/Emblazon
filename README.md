@@ -1,4 +1,5 @@
 # Emblazon
+https://emblazon2k26.vercel.app/
 
 A React + Vite single-page site for a cultural fest, featuring a hero landing experience with parallax/tilt effects and routed sections for Events, Sponsors, Gallery, and Organising Committee.
 
