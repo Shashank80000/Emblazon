@@ -1,0 +1,91 @@
+/* Sparkle Cursor Styles */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  width: var(--sparkle-size, 10px);
+  height: var(--sparkle-size, 10px);
+  background: radial-gradient(circle, #e7f7ff 0%, var(--sparkle-color, #3bd6ff) 60%, rgba(255, 255, 255, 0) 70%);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  animation: sparkleAnimation var(--sparkle-duration, 900ms) ease-out forwards;
+  z-index: 9999;
+  box-shadow: 0 0 12px var(--sparkle-color, #3bd6ff), 0 0 28px rgba(120, 215, 255, 0.9);
+  transform: translate(-50%, -50%) scale(0.6) rotate(var(--sparkle-rotate, 0deg));
+  mix-blend-mode: screen;
+}
+
+@keyframes sparkleAnimation {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.5) rotate(var(--sparkle-rotate, 180deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(360deg);
+  }
+}
+
+/* Add a subtle glow effect to enhance the sparkle */
+.sparkle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(231, 247, 255, 0.85) 0%, rgba(231, 247, 255, 0) 70%);
+  clip-path: inherit;
+  filter: blur(4px);
+  opacity: 0.6;
+}
+
+/* Star-like rays */
+.sparkle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background:
+    linear-gradient(90deg, transparent, rgba(171, 233, 255, 0.9), transparent),
+    linear-gradient(0deg, transparent, rgba(171, 233, 255, 0.9), transparent);
+  opacity: 0.75;
+  filter: blur(0.8px);
+}
+
+/* Optional: Change cursor style */
+* {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="%23ffd700" opacity="0.5"/><circle cx="12" cy="12" r="2" fill="%23fff"/></svg>') 12 12, auto;
+}
+
+/* Keep default cursor for clickable elements */
+a, button, input, textarea, select {
+  cursor: pointer;
+}
+
+/* Allow sparkles on small screens */
+
+/* Reduce sparkle size on smaller screens */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sparkle {
+    width: 8px;
+    height: 8px;
+  }
+}

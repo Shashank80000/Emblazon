@@ -77,9 +77,11 @@ body.home-background::after {
 	min-height: calc(100vh - var(--site-header-height));
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
+	margin: 0px;
+	padding-top: 80px;
 }
 
 @keyframes depthTilt {
@@ -150,6 +152,18 @@ body.home-background .app-shell {
 	display: flex;
 	flex-direction: column;
 	gap: 36px;
+	opacity: 0;
+	transition: opacity 1s ease 0.5s;
+}
+
+/* Show content after animation completes */
+.animation-complete .content-stack {
+	opacity: 1;
+}
+
+/* Hide content during start animation */
+.animation-running .content-stack {
+	opacity: 0;
 }
 
 .section {
@@ -233,6 +247,129 @@ body.home-background .app-shell {
 	margin: 0;
 }
 
+/* Responsive improvements for all devices */
+/* shashank Pandey */
+
+/* Extra small mobile devices (portrait phones, less than 480px) */
+@media (max-width: 479px) {
+	:root {
+		--site-header-height: 80px;
+	}
+
+	.content-stack {
+		padding: 16px 4vw 32px;
+		gap: 24px;
+	}
+
+	.section {
+		padding: 60px 16px;
+		border-radius: 20px;
+	}
+
+	.section-title {
+		font-size: clamp(1.5rem, 6vw, 2rem);
+		letter-spacing: 0.08em;
+		margin-bottom: 12px;
+		line-height: 1.2;
+	}
+
+	.section-kicker {
+		font-size: 0.7rem;
+		letter-spacing: 0.4em;
+		margin-bottom: 16px;
+	}
+
+	.section-copy {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		padding: 0 8px;
+	}
+
+	.home-logo {
+		width: min(240px, 65vw);
+		margin-bottom: 12px;
+	}
+
+	.home-soon {
+		font-size: clamp(1rem, 5vw, 1.4rem);
+		letter-spacing: 0.15em;
+		padding: 0 16px;
+	}
+
+	.section-home {
+		min-height: calc(100vh - 80px);
+		padding: 20px 16px;
+	}
+
+	body.home-background {
+		background-size: cover;
+		background-position: center;
+		background-attachment: scroll;
+	}
+}
+
+/* Small mobile devices (landscape phones, 480px to 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+	:root {
+		--site-header-height: 100px;
+	}
+
+	.content-stack {
+		padding: 20px 5vw 40px;
+		gap: 28px;
+	}
+
+	.section {
+		padding: 70px 20px;
+		border-radius: 24px;
+	}
+
+	.section-title {
+		font-size: clamp(1.8rem, 5vw, 2.3rem);
+		letter-spacing: 0.1em;
+	}
+
+	.section-copy {
+		font-size: 1rem;
+		line-height: 1.65;
+	}
+
+	.home-logo {
+		width: min(280px, 68vw);
+	}
+
+	body.home-background {
+		background-attachment: scroll;
+	}
+}
+
+/* Tablets (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+	:root {
+		--site-header-height: 120px;
+	}
+
+	.content-stack {
+		padding: 28px 6vw 56px;
+		gap: 32px;
+	}
+
+	.section {
+		padding: 90px 32px;
+		border-radius: 28px;
+	}
+
+	.section-title {
+		font-size: clamp(2rem, 4vw, 2.5rem);
+	}
+
+	.section-copy {
+		font-size: 1.02rem;
+		max-width: 640px;
+	}
+}
+
+/* Legacy mobile breakpoint (kept for compatibility) */
 @media (max-width: 768px) {
 	.content-stack {
 		padding: 24px 6vw 48px;
@@ -241,8 +378,48 @@ body.home-background .app-shell {
 	.section {
 		padding: 90px 20px;
 	}
+
+	/* Disable heavy animations on mobile */
+	body.home-background {
+		animation: none;
+	}
+
+	body.home-background::before,
+	body.home-background::after {
+		opacity: 0.3;
+		animation: none;
+	}
 }
 
+/* Laptops and small desktops (1024px to 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+	.section {
+		padding: 100px 48px 95px;
+	}
+
+	.content-stack {
+		padding: 32px 7vw 60px;
+	}
+}
+
+/* Large desktops (1440px and up) */
+@media (min-width: 1440px) {
+	.section {
+		padding: 130px 80px 120px;
+		max-width: 1400px;
+	}
+
+	.content-stack {
+		padding: 40px 8vw 72px;
+	}
+
+	.section-copy {
+		max-width: 800px;
+		font-size: 1.1rem;
+	}
+}
+
+/* Legacy desktop breakpoint */
 @media (min-width: 1200px) {
 	.section {
 		padding: 120px 64px 110px;
@@ -255,6 +432,13 @@ body.home-background .app-shell {
 	transition: transform 0.12s linear;
 }
 
+/* Disable 3D effects on mobile for better performance */
+@media (max-width: 768px) {
+	.section-home {
+		transform: none;
+	}
+}
+
 /* subtle parallax on the overlay layers */
 body.home-background::before {
 	transform: perspective(1200px) translateZ(0) translate3d(calc(var(--tilt-y, 0deg) * 0.4), calc(var(--tilt-x, 0deg) * 0.25), 0) rotateX(2deg);
@@ -262,4 +446,11 @@ body.home-background::before {
 
 body.home-background::after {
 	transform: translateZ(0) translate3d(calc(var(--tilt-y, 0deg) * -0.18), calc(var(--tilt-x, 0deg) * -0.12), 0) scale(1.05);
+}
+
+@media (max-width: 768px) {
+	body.home-background::before,
+	body.home-background::after {
+		transform: none;
+	}
 }

@@ -3,6 +3,13 @@ import logo from '../assets/logo.png'
 
 const Home = () => {
   useEffect(() => {
+    // Disable parallax effects on mobile for better performance
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      return; // Skip mouse tracking on mobile
+    }
+
     const onMove = (e) => {
       const w = window.innerWidth
       const h = window.innerHeight
@@ -28,9 +35,6 @@ const Home = () => {
     }
 
     window.addEventListener('mousemove', onMove)
-    window.addEventListener('touchmove', (ev) => {
-      if (ev.touches && ev.touches[0]) onMove(ev.touches[0])
-    })
 
     return () => {
       window.removeEventListener('mousemove', onMove)
@@ -40,7 +44,7 @@ const Home = () => {
   return (
     <section id="home" className="section-home">
       <img src={logo} alt="Emblazon" className="home-logo" />
-      <p className="home-soon">Cultural fest Coming Soon</p>
+      <p className="home-soon">Cultural fest Coming Soon...</p>
     </section>
   )
 }
