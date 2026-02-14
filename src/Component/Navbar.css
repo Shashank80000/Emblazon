@@ -30,6 +30,21 @@
   transform:translateY(-50%);
 }
 
+.brand a {
+  display: block;
+  line-height: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.brand a:hover {
+  opacity: 0.8;
+}
+
+.brand a:focus {
+  outline: none;
+}
+
 .brand-logo{
   width: clamp(120px, 12vw, 300px);
   max-width: 100%;
