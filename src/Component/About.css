@@ -1,0 +1,254 @@
+/* About Section Container */
+.about-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #000;
+  z-index: 10;
+  scroll-behavior: smooth;
+}
+
+/* Background Video Styles */
+.about-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Text Content Container */
+.about-text-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 160px; /* Below navbar */
+  min-height: 100vh;
+  opacity: 1;
+}
+
+.about-text-content.visible {
+  opacity: 1;
+}
+
+.about-text-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 30px 80px;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Paragraph Styles */
+.about-paragraph {
+  color: #f0f0f0;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  text-shadow: 
+    1px 1px 3px rgba(0, 0, 0, 0.9),
+    0 0 5px rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Video Status Messages */
+.video-status {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+  z-index: 10;
+}
+
+.video-status.error {
+  color: #ff4444;
+  background-color: rgba(255, 68, 68, 0.2);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+/* Tablet Styles (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .about-text-content {
+    padding-top: 140px;
+  }
+
+  .about-text-container {
+    padding: 30px 25px 80px;
+    max-width: 90%;
+  }
+
+  .about-paragraph {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  }
+}
+
+/* Mobile Landscape (max-height 600px) */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+  .about-text-content {
+    padding-top: 100px;
+  }
+
+  .about-text-container {
+    padding: 25px 20px 60px;
+  }
+
+  .about-paragraph {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .video-status {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .about-video {
+    /* Ensure video covers on landscape mobile */
+    min-width: 100%;
+    min-height: 100%;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+/* Mobile Portrait (max-width 768px) */
+@media screen and (max-width: 768px) {
+  .about-container {
+    /* Prevent overflow issues on mobile browsers */
+    height: 100dvh; /* Use dynamic viewport height if supported */
+  }
+
+  .about-text-content {
+    padding-top: 120px;
+  }
+
+  .about-text-container {
+    padding: 30px 20px 80px;
+    max-width: 95%;
+  }
+
+  .about-paragraph {
+    font-size: clamp(0.9rem, 3vw, 1.05rem);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .video-status {
+    font-size: 1rem;
+    padding: 8px 16px;
+    max-width: 90%;
+    bottom: 15px;
+  }
+
+  .about-video {
+    /* Better mobile video handling */
+    object-position: center center;
+  }
+}
+
+/* Small Mobile (max-width 480px) */
+@media screen and (max-width: 480px) {
+  .about-text-content {
+    padding-top: 110px;
+  }
+
+  .about-text-container {
+    padding: 25px 15px 70px;
+  }
+
+  .about-paragraph {
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
+    line-height: 1.6;
+  }
+
+  .video-status {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Extra Small Screens (max-width 320px) */
+@media screen and (max-width: 320px) {
+  .about-paragraph {
+    font-size: 0.8rem;
+  }
+
+  .video-status {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
+
+/* High DPI Screens */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+  .about-paragraph {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .about-video {
+    animation: none;
+  }
+
+  .about-paragraph {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .about-container {
+    background-color: #000;
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .about-container {
+    height: -webkit-fill-available;
+  }
+
+  .about-video {
+    /* Fix iOS Safari video positioning */
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+

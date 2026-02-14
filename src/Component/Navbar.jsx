@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import './Navbar.css'
 import logo from '../assets/shreeNavlogo.png'
 
@@ -30,7 +30,9 @@ const Navbar = () => {
       
       <header className="site-header">
         <div className="brand">
-          <img src={logo} alt="Emblazon Logo" className="brand-logo" />
+          <Link to="/" onClick={closeMenu} aria-label="Go to homepage">
+            <img src={logo} alt="Emblazon Logo" className="brand-logo" />
+          </Link>
         </div>
 
         <button
