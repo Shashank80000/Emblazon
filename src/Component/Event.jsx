@@ -1,4 +1,3 @@
-import React from "react";
 import { events } from "../data/eventsData";
 
 const EventCard = ({ event }) => {
