@@ -1,8 +1,10 @@
-/* Navbar styles: gradient header, left logo, centered pill nav */
-.site-header{
-  position:relative;
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background: transparent;
-  padding:18px 0 0;
+  padding: 18px 22px;
   min-height: var(--site-header-height);
   z-index: 2000;
   margin: 0;
@@ -11,6 +13,10 @@
   box-shadow: none;
   opacity: 0;
   transition: opacity 0.8s ease 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 /* Show header after animation completes */
@@ -23,11 +29,11 @@
   opacity: 0;
 }
 
-.brand{
-  position:absolute;
-  left:22px;
-  top:50%;
-  transform:translateY(-50%);
+.brand {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .brand a {
@@ -45,13 +51,31 @@
   outline: none;
 }
 
-.brand-logo{
+.brand-logo {
   width: clamp(120px, 12vw, 300px);
   max-width: 100%;
   height: auto;
-  display:block;
+  display: block;
   opacity: 0;
   transition: opacity 0.8s ease, width 0.3s ease;
+}
+
+/* Show logo after animation completes */
+.animation-complete .brand-logo {
+  opacity: 1;
+}
+
+/* Hide logo during start animation */
+.animation-running .brand-logo {
+  opacity: 0;
+}
+
+/* Desktop Gooey Nav */
+.desktop-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2100;
 }
 
 /* Show logo after animation completes */
