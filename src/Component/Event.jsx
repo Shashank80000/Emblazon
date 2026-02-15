@@ -108,14 +108,7 @@ const Event = () => {
     <section id="events" className="section section-event relative min-h-screen">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        <div className="text-center mb-20">
-          <p className="section-kicker">Experience the Vibe</p>
-          <h2 className="section-title">Events Schedule</h2>
-          <p className="section-copy mx-auto">
-            From electrifying performances to mind-bending competitions,
-            explore the pulse of Emblazon 2K26.
-          </p>
-        </div>
+        {/* Headings removed per design request */}
 
         <EventSection
           title="List of Events of Emblazon-2K26"

@@ -266,7 +266,9 @@ body.home-background .app-shell {
 }
 
 .section-event {
-	background: linear-gradient(135deg, rgba(185, 131, 4, 0.25), rgba(25, 6, 43, 0.95));
+	background: transparent;
+	border: none;
+	box-shadow: none;
 }
 
 .section-schedule {
