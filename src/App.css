@@ -288,11 +288,8 @@ body.home-background .app-shell {
 	padding: 0;
 	border-radius: 0;
 	margin: 0 calc(50% - 50vw);
-	position: fixed;
-	inset: var(--site-header-height) 0 0 0;
+	position: relative;
 	z-index: 1;
-	transform-origin: center top;
-	will-change: opacity, transform;
 }
 
 .gallery-hero {
