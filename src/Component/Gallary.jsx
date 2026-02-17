@@ -128,7 +128,10 @@ const Gallary = () => {
               <motion.div
                 ref={thumbRef}
                 className="gallery-scroll-track"
-                style={{ x }}
+                style={{ 
+                  x,
+                  willChange: 'transform' 
+                }}
                 drag="x"
                 dragElastic={0.2}
                 dragMomentum={true}
@@ -165,7 +168,7 @@ const Gallary = () => {
           <div className="gallery-hero">
             <h1 className="gallery-title">Glimpse of Emblazon</h1>
           </div>
-          <div className="dome-gallery-shell">
+          <div className="dome-gallery-shell" style={{ willChange: 'transform' }}>
             <DomeGallery
               images={domeImages}
               fit={domeSizing.fit}
