@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useScroll, useTransform, useMotionValue, useVelocity } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import DomeGallery from './DomeGallery'
 import './Gallary.css'
 
@@ -57,7 +57,6 @@ const MOBILE_GAP = 15
 const Gallary = () => {
   const containerRef = useRef(null)
   const thumbRef = useRef(null)
-  const dragX = useMotionValue(0)
   const [itemMetrics, setItemMetrics] = useState({
     width: DESKTOP_ITEM_WIDTH,
     gap: DESKTOP_GAP
@@ -65,9 +64,13 @@ const Gallary = () => {
   const [domeSizing, setDomeSizing] = useState({
     minRadius: 700,
     maxRadius: 1200,
-    fit: 0.9
+    fit: 0.9,
+    autoRotate: true,
+    autoRotateSpeed: 70,
+    segments: 34,
+    pointerFollow: false
   })
-  const [constraintsX, setConstraintsX] = useState(-1000)
+  
 
   useEffect(() => {
     const updateItemMetrics = () => {
@@ -83,10 +86,7 @@ const Gallary = () => {
     return () => window.removeEventListener('resize', updateItemMetrics)
   }, [])
 
-  useEffect(() => {
-    const totalDistance = (scrollItems.length - 1) * (itemMetrics.width + itemMetrics.gap)
-    setConstraintsX(-totalDistance)
-  }, [itemMetrics])
+  
 
   useEffect(() => {
     const updateDomeSizing = () => {
@@ -97,8 +97,14 @@ const Gallary = () => {
       const minRadius = Math.round(clamp(base * 0.75, 400, 820))
       const maxRadius = Math.round(clamp(base * 1.2, 520, 1300))
       const fit = width < 600 ? 0.95 : width < 900 ? 0.92 : 0.9
+      // keep auto-rotate enabled but reduce speed on small screens
+      const autoRotate = true
+      const autoRotateSpeed = width < 600 ? 25 : width < 900 ? 45 : 70
+      const segments = width >= 1200 ? 34 : width >= 800 ? 24 : 16
+      // allow manual rotation on small screens via pointer/follow
+      const pointerFollow = width < 900
 
-      setDomeSizing({ minRadius, maxRadius, fit })
+      setDomeSizing({ minRadius, maxRadius, fit, autoRotate, autoRotateSpeed, segments, pointerFollow })
     }
 
     updateDomeSizing()
@@ -125,37 +131,35 @@ const Gallary = () => {
 
           <div ref={containerRef} className="gallery-scroll-container">
             <div className="gallery-sticky-wrapper">
-              <motion.div
-                ref={thumbRef}
-                className="gallery-scroll-track"
-                style={{ 
-                  x,
-                  willChange: 'transform' 
-                }}
-                drag="x"
-                dragElastic={0.2}
-                dragMomentum={true}
-                onDrag={() => {
-                  // Drag is active
-                }}
-                dragConstraints={{ left: constraintsX, right: 0 }}
-              >
-                {scrollItems.map(item => (
-                  <div
-                    key={item.id}
-                    className="gallery-scroll-item"
-                    style={{
-                      '--item-color': item.color,
-                      '--item-image': `url(${item.image})`
-                    }}
-                  >
-                    <div className="gallery-item-content">
-                      <span className="gallery-item-number">0{item.id}</span>
-                      <h2>{item.label}</h2>
+                <motion.div
+                  ref={thumbRef}
+                  className="gallery-scroll-track"
+                  style={{ 
+                    x,
+                    willChange: 'transform' 
+                  }}
+                >
+                  {scrollItems.map(item => (
+                    <div
+                      key={item.id}
+                      className="gallery-scroll-item"
+                      style={{
+                        '--item-color': item.color
+                      }}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.label}
+                        className="gallery-scroll-img"
+                        loading="lazy"
+                      />
+                      <div className="gallery-item-content">
+                        <span className="gallery-item-number">0{item.id}</span>
+                        <h2>{item.label}</h2>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </motion.div>
+                  ))}
+                </motion.div>
             </div>
           </div>
 
@@ -175,12 +179,12 @@ const Gallary = () => {
               minRadius={domeSizing.minRadius}
               maxRadius={domeSizing.maxRadius}
               maxVerticalRotationDeg={0}
-              segments={34}
+              segments={domeSizing.segments}
               dragDampening={2}
               grayscale={false}
-              autoRotate
-              autoRotateSpeed={70}
-              pointerFollow={false}
+              autoRotate={domeSizing.autoRotate}
+              autoRotateSpeed={domeSizing.autoRotateSpeed}
+              pointerFollow={domeSizing.pointerFollow}
             />
           </div>
         </div>
